@@ -1,0 +1,87 @@
+<div class="panel panel-default" style="margin-top:10px;">
+    <div class="panel-heading">
+        Working Queue
+    </div>
+
+        
+    
+    <div class="form-group row" style="margin-top:10px;">
+
+
+       <button type="button" style="margin-right:30px;" class="btn btn-primary glyphicon glyphicon-filter pull-right " (click)="show()" pButton icon="pi pi-info-circle" label="Show" ></button>
+         <div class="col-xs-2">
+            <input  type="text" class="form-control" placeholder="Deal Id" [(ngModel)]="dealid" (input)="Search('dealid')" > 
+        </div>
+        <div class="col-xs-2">
+            <input  type="text" class="form-control" placeholder="Deal Name" [(ngModel)]="dealname" (input)="Search('dealname')" > 
+        </div>
+        <div class="col-xs-2">
+            <input  type="text" class="form-control" placeholder="Frequency" [(ngModel)]="frequency" (input)="Search('frequency')" > 
+        </div>
+        <div class="col-xs-2">
+            <input  type="text" class="form-control" placeholder="Fund Type" [(ngModel)]="type" (input)="Search('type')" > 
+        </div>
+        
+    </div>
+
+
+      <p-dialog [contentStyle]="{'max-height':'200px'}" [(visible)]="display">
+            <ul>
+                <li *ngFor="let deal of columns">{{deal}}<li>
+            </ul>
+        </p-dialog>
+
+
+           <table>
+            <tr >
+                <td>
+                <div id="matchip">
+                <!-- <mat-form-field class="example-chip-list" style="width:100%"> -->
+                    <mat-chip-list #chipList>
+                      <mat-chip *ngFor="let deal of this.selecteddeals" [selectable]="selectable"
+                               [removable]="removable" (removed)="remove(deal)">
+                        {{deal.value}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <!-- <input placeholder=""
+                             [matChipInputFor]="chipList"
+                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                             [matChipInputAddOnBlur]="addOnBlur"
+                             (matChipInputTokenEnd)="add($event)"> -->
+                    </mat-chip-list>
+                  <!-- </mat-form-field> -->
+                </div>
+                
+                </td>
+                </tr>
+                <br>
+            </table>
+       
+                
+
+        <div class="table-responsive">
+            <table class="table" >
+                <tr>
+                    <th>#</th>
+                    <th>Deal ID</th>
+                    <th>Deal Name</th> 
+                    <th>Frequency</th>
+                    <th>Accounting Method</th>
+                    <th>Type</th>
+                    <th>status</th>
+                    <th>lastupdated</th>
+                </tr>
+                <tr *ngFor="let deal of deals; let i = index ">
+                    <td>{{i + 1}}</td>
+                    <td>{{deal.dealid}}</td>
+                    <td>{{deal.dealname}}</td>
+                    <td>{{deal.frequency}}</td>
+                    <td>{{deal.amethod}}</td>
+                    <td>{{deal.type}}</td>
+                    <td>{{deal.status}}</td>
+                    <td>{{deal.lastupdated}}</td>
+                </tr>
+            </table>
+        </div>
+
+
